@@ -33,18 +33,58 @@ public class BurgerBuilder {
     }
 
     public BurgerBuilder addIngredient(BurgerAdditionalIngredients additionalIngredient){
-        Objects.requireNonNull(additionalIngredient, "Ингредиент не может быть null");
+        Objects.requireNonNull(additionalIngredient, "Ingredient can't be null");
         if(!additionalIngredients.contains(additionalIngredient)){
             this.additionalIngredients.add(additionalIngredient);
         }
         return this;
     }
     public BurgerBuilder addIngredient(BurgerWithoutIngredients withoutIngredient){
-        Objects.requireNonNull(withoutIngredient, "Ингредиент не может быть null");
+        Objects.requireNonNull(withoutIngredient, "Ingredient can't be null");
         if(!withoutIngredients.contains(withoutIngredient)){
             this.withoutIngredients.add(withoutIngredient);
         }
         return this;
+    }
+
+    public double calculateEstimatedPrice(){
+        if(size == null) return 0.0;
+
+        double basePrice;
+
+        if (size == Burger.BurgerSize.ONE && type == Burger.BurgerType.BEEF) {
+            basePrice = 1900.0;
+        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.CHICKEN) {
+            basePrice = 1900.0;
+        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.BEEF) {
+            basePrice = 2250.0;
+        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.MIX) {
+            basePrice = 2500.0;
+        } else {
+            basePrice = 1500.0;
+        }
+
+        basePrice += additionalIngredients.size() * 200;
+        return basePrice;
+
+        public Burger build(){
+            validateConfiguration();
+            return new Burger(this);
+        }
+
+        private void validateConfiguration(){
+            if (size == null) {
+                throw new IllegalStateException("Needs to choose size of burger!");
+            }
+        }
+
+        public BurgerSize getSize() {return size};
+        public BurgerType getType() {return type};
+        public BurgerSauce getSauce() {return sauce};
+        public BurgerDrink getDrink() {return drink};
+        public BurgerDrinkSize getDrinkSize() {return drinkSize};
+        public List<BurgerAdditionalIngredients> getAdditionalIngredients() {return additionalIngredients};
+        public List<BurgerWithoutIngredients> getWithoutIngredients() {return withoutIngredients};
     }
 }
 
