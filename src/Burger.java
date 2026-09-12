@@ -15,4 +15,21 @@ public class Burger {
     private final List<BurgerAdditionalIngredients> additionalIngredients;
     private final List<BurgerWithoutIngredients> withoutIngredients;
 
+    Burger(BurgerBuilder builder){
+        this.size = builder.getSize();
+        this.type = builder.getType();
+        this.sauce = builder.getSauce();
+        this.drink = builder.getDrink();
+        this.drinkSize = builder.getDrinkSize();
+        this.additionalIngredients = builder.getAdditionalIngredients();
+        this.withoutIngredients = builder.getWithoutIngredients();
+    }
+
+    public BurgerSize getSize() {return size};
+    public BurgerType getType() {return type};
+    public BurgerSauce getSauce() {return sauce};
+    public BurgerDrink getDrink() {return drink};
+    public BurgerDrinkSize getDrinkSize() {return drinkSize};
+    public List<BurgerAdditionalIngredients> getAdditionalIngredients() {return additionalIngredients};
+    public List<BurgerWithoutIngredients> getWithoutIngredients() {return withoutIngredients};
 }
