@@ -51,18 +51,18 @@ public class BurgerBuilder {
     public double calculateEstimatedPrice() {
         if (size == null) return 0.0;
 
-        double basePrice;
+        double basePrice = 0.0;
 
         if (size == Burger.BurgerSize.ONE && type == Burger.BurgerType.BEEF) {
-            basePrice = 1900.0;
-        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.CHICKEN) {
-            basePrice = 1900.0;
+            basePrice = 1650.0;
         } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.BEEF) {
             basePrice = 2250.0;
-        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.MIX) {
-            basePrice = 2500.0;
-        } else {
+        } else if (size == Burger.BurgerSize.ONE && type == Burger.BurgerType.CHICKEN) {
             basePrice = 1500.0;
+        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.CHICKEN) {
+            basePrice = 1900.0;
+        } else if (size == Burger.BurgerSize.TWO && type == Burger.BurgerType.MIX) {
+            basePrice = 2100.0;
         }
 
         if (drink == Burger.BurgerDrink.AYRAN && drinkSize == Burger.BurgerDrinkSize.ONE) {
@@ -99,7 +99,10 @@ public class BurgerBuilder {
             basePrice += 200;
         }
 
-        basePrice += additionalIngredients.size() * 200;
+        if(additionalIngredients.size() != 1){
+            basePrice += additionalIngredients.size() * 200;
+        }
+
         return basePrice;
         }
 

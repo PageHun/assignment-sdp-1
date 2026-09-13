@@ -5,7 +5,7 @@ public class Burger {
     public enum BurgerType {BEEF, CHICKEN, MIX}
     public enum BurgerSauce {KETCHUP, BBQ, CHEESE, NONE}
     public enum BurgerDrink {BONAQUA, FUSE_TEA, COCA_COLA, AYRAN, COMPOTE, SPRITE, FANTA, NONE}
-    public enum BurgerDrinkSize {ONE, ONE_HALF}
+    public enum BurgerDrinkSize {ONE, ONE_HALF, NONE}
     public enum BurgerAdditionalIngredients {JALAPENO, TOMATO, GAUDA_CHEESE, LAZJAN_SAUCE, NONE}
     public enum BurgerWithoutIngredients {TOMATO, LETTUCE, WHITE_SAUCE, RED_SAUCE, NONE}
 
