@@ -1,0 +1,142 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Burger {
+    - size: BurgerSize
+    - type: BurgerType
+    - sauce: BurgerSauce
+    - drink: BurgerDrink
+    - drinkSize: BurgerDrinkSize
+    - additionalIngredients: List<BurgerAdditionalIngredients>
+    - withoutIngredients: List<BurgerWithoutIngredients>
+    + Burger(builder: BurgerBuilder)
+    + toString(): String
+}
+
+enum BurgerSize {
+    ONE
+    TWO
+}
+
+enum BurgerType {
+    BEEF
+    CHICKEN
+    MIX
+}
+
+enum BurgerSauce {
+    KETCHUP
+    BBQ
+    CHEESE
+    NONE
+}
+
+enum BurgerDrink {
+    BONAQUA
+    FUSE_TEA
+    COCA_COLA
+    AYRAN
+    PICO
+    COMPOTE
+    SPRITE
+    FANTA
+    NONE
+}
+
+enum BurgerDrinkSize {
+    ONE
+    ONE_HALF
+    NONE
+}
+
+enum BurgerAdditionalIngredients {
+    JALAPENO
+    TOMATO
+    GAUDA_CHEESE
+    LAZJAN_SAUCE
+    NONE
+}
+
+enum BurgerWithoutIngredients {
+    TOMATO
+    LETTUCE
+    WHITE_SAUCE
+    RED_SAUCE
+    NONE
+}
+
+class BurgerBuilder {
+    - size: BurgerSize
+    - type: BurgerType
+    - sauce: BurgerSauce
+    - drink: BurgerDrink
+    - drinkSize: BurgerDrinkSize
+    - additionalIngredients: List<BurgerAdditionalIngredients>
+    - withoutIngredients: List<BurgerWithoutIngredients>
+    + setSize(size: BurgerSize): BurgerBuilder
+    + setType(type: BurgerType): BurgerBuilder
+    + setSauce(sauce: BurgerSauce): BurgerBuilder
+    + setDrink(drink: BurgerDrink): BurgerBuilder
+    + setDrinkSize(drinkSize: BurgerDrinkSize): BurgerBuilder
+    + addAdditionalIngredient(ingredient: BurgerAdditionalIngredients): BurgerBuilder
+    + addWithoutIngredient(ingredient: BurgerWithoutIngredients): BurgerBuilder
+    + calculateEstimatedPrice(): double
+    + build(): Burger
+}
+
+interface BurgerRecipeBuilder {
+    + buildSize(): void
+    + buildType(): void
+    + buildSauce(): void
+    + buildDrink(): void
+    + buildDrinkSize(): void
+    + buildAdditionalIngredients(): void
+    + buildWithoutIngredients(): void
+    + calculateEstimatedPrice(): double
+    + getBurger(): Burger
+}
+
+class GamBurgerBuilder implements BurgerRecipeBuilder {
+    - builder: BurgerBuilder
+    + buildSize(): void
+    + buildType(): void
+    + buildSauce(): void
+    + buildDrink(): void
+    + buildDrinkSize(): void
+    + buildAdditionalIngredients(): void
+    + buildWithoutIngredients(): void
+    + calculateEstimatedPrice(): double
+    + getBurger(): Burger
+}
+
+class CheeseBurgerBuilder implements BurgerRecipeBuilder {
+    - builder: BurgerBuilder
+    + buildSize(): void
+    + buildType(): void
+    + buildSauce(): void
+    + buildDrink(): void
+    + buildDrinkSize(): void
+    + buildAdditionalIngredients(): void
+    + buildWithoutIngredients(): void
+    + calculateEstimatedPrice(): double
+    + getBurger(): Burger
+}
+
+class BurgerDirector {
+    + makeBurger(builder: BurgerRecipeBuilder): Burger
+}
+
+Burger +-- BurgerSize
+Burger +-- BurgerType
+Burger +-- BurgerSauce
+Burger +-- BurgerDrink
+Burger +-- BurgerDrinkSize
+Burger +-- BurgerAdditionalIngredients
+Burger +-- BurgerWithoutIngredients
+
+BurgerBuilder ..> Burger : <<creates>>
+GamBurgerBuilder *-- BurgerBuilder
+CheeseBurgerBuilder *-- BurgerBuilder
+BurgerDirector o-- BurgerRecipeBuilder
+
+@enduml
